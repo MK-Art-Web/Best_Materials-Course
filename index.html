@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MK.art — Arte e Design</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-placeholder">
+        <img src="mk.png" alt="Logo MK.art" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
+      </div>
+      <nav class="main-nav">
+        <a href="#" class="nav-link">Início</a>
+        <a href="#produtos" class="nav-link">Produtos</a>
+        <a href="#cursos" class="nav-link">Cursos</a>
+        <a href="#sobre" class="nav-link">Sobre</a>
+        <a href="#contato" class="nav-link">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Bem-vindo ao espaço criativo do <span class="highlight">MK.art</span></h1>
+      <p class="hero-sub">Aqui a arte ganha forma, cor e propósito.</p>
+    </div>
+  </section>
+
+  <!-- PRODUTOS -->
+  <section id="produtos" class="produtos section">
+    <div class="container">
+      <h2 class="section-title">Meus Produtos</h2>
+      <div id="produtos-container" class="cards"></div>
+    </div>
+  </section>
+
+  <!-- CURSOS -->
+  <section id="cursos" class="cursos section">
+    <div class="container">
+      <h2 class="section-title">Cursos</h2>
+      <div id="cursos-container" class="cards"></div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="sobre section">
+    <div class="container">
+      <h2 class="section-title">Sobre</h2>
+      <p class="sobre-text">
+        Sou um criador apaixonado por arte e por transformar ideias em obras únicas.
+        Este espaço foi feito para compartilhar minhas criações e os produtos que recomendo para outros artistas.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner" style="display:flex; flex-direction:column; align-items:center; gap:1rem;">
+      <div class="socials" style="display:flex; gap:1.5rem; align-items:center;">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/art_mk21" target="_blank" class="social-link">
+          <i class="fab fa-instagram" style="color:#3b82f6; font-size:24px;"></i> Instagram
+        </a>
+        <!-- YouTube -->
+        <a href="https://youtube.com/@ofc.maykonff" target="_blank" class="social-link">
+          <i class="fab fa-youtube" style="color:#3b82f6; font-size:24px;"></i> YouTube
+        </a>
+        <!-- TikTok -->
+        <a href="https://www.tiktok.com/@maykon3329" target="_blank" class="social-link">
+          <i class="fab fa-tiktok" style="color:#3b82f6; font-size:24px;"></i> TikTok
+        </a>
+      </div>
+      <div class="copyright" style="color:var(--muted); font-size:0.9rem;">
+        © 2025 MK.art — Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- POP-UP DE CURSOS -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <button id="fechar-popup">Fechar</button>
+      <p>Este curso está em desenvolvimento. Em breve!</p>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    const produtos = [
+      { nome: "Folhas", descricao: "Folhas para desenho e pintura.", imagem: "1.png", link: "https://graceful-sawine-2d1e77.netlify.app/" },
+      { nome: "Lápis de Cor", descricao: "Lápis de cor de várias cores.", imagem: "3.png", link: "https://aesthetic-crumble-d5abc9.netlify.app/" },
+      { nome: "Canetas", descricao: "Canetas coloridas e técnicas.", imagem: "2.png", link: "https://golden-scone-fbc0ee.netlify.app/" }
+    ];
+
+    const cursos = [
+      { nome: "Curso Básico de Desenho", descricao: "Aprenda as bases do desenho e técnicas iniciais.", imagem: "Imagem Curso Básico" },
+      { nome: "Curso Intermediário de Desenho", descricao: "Aprofunde suas habilidades e técnicas de desenho.", imagem: "Imagem Curso Intermediário" }
+    ];
+
+    const produtosContainer = document.getElementById("produtos-container");
+    const cursosContainer = document.getElementById("cursos-container");
+    const popup = document.getElementById("popup");
+    const fecharPopup = document.getElementById("fechar-popup");
+
+    produtos.forEach(produto => {
+      const card = document.createElement("article");
+      card.className = "card produto-card";
+      card.innerHTML = `
+        <div class="img-placeholder"><img src="${produto.imagem}" alt="${produto.nome}"></div>
+        <h3 class="produto-nome">${produto.nome}</h3>
+        <p class="produto-desc">${produto.descricao}</p>
+        <a href="${produto.link}" target="_blank" class="btn-outline">Ver Produto</a>
+      `;
+      produtosContainer.appendChild(card);
+    });
+
+    cursos.forEach(curso => {
+      const card = document.createElement("article");
+      card.className = "card curso-card";
+      card.innerHTML = `
+        <div class="img-placeholder">${curso.imagem}</div>
+        <h3 class="produto-nome">${curso.nome}</h3>
+        <p class="produto-desc">${curso.descricao} (Em andamento)</p>
+      `;
+      card.addEventListener("click", () => popup.classList.add("active"));
+      cursosContainer.appendChild(card);
+    });
+
+    fecharPopup.addEventListener("click", () => popup.classList.remove("active"));
+    popup.addEventListener("click", e => { if (e.target === popup) popup.classList.remove("active"); });
+  </script>
+</body>
+</html>
